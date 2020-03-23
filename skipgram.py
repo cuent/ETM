@@ -3,6 +3,10 @@ import pickle
 import os
 import numpy as np
 import argparse
+import logging
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
 
 parser = argparse.ArgumentParser(description='The Embedded Topic Model')
 
@@ -25,7 +29,8 @@ class MySentences(object):
         self.filename = filename
  
     def __iter__(self):
-        for line in open(self.filename):
+        for i, line in enumerate(open(self.filename)):
+            if i == 0: continue
             yield line.split()
 
 # Gensim code to obtain the embeddings
